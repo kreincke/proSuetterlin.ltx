@@ -19,7 +19,9 @@
   <a href="#contributions">Contributors</a>  
   <a href="#licensing">Licensing</a>
   <br />
+    
   ![the proSuetterlinLogo](img/logo.png)
+  
 </p>
 
 ***proSuetterlin.ltx*** offers a set of configuration- and template-files to use the old German handwriting in *LaTeX*-Files, particularly in texts of the relevant humanities disciplines. It is primarily aimed at German speaking and writing people/scientists. 
