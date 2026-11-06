@@ -1,0 +1,216 @@
+% This file is part of proScientia.ltx
+% (c) 2022 Karsten Reincke (https://github.com/kreincke/proScientia.ltx)
+% It is distributed under the terms of the creative commons license
+% CC-BY-4.0 (= https://creativecommons.org/licenses/by/4.0/)
+
+\documentclass[
+  DIV=calc,
+  BCOR=5mm,
+  11pt,
+  headings=small,
+  oneside,
+  abstract=true,
+  toc=bib,
+  english,ngerman]{scrartcl}
+
+%%% (1) general configurations %%%
+\usepackage[utf8]{inputenc}
+\usepackage{a4}
+\usepackage[ngerman]{babel}
+
+\usepackage[
+  backend=biber,
+  style=authortitle-dw,
+  sortlocale=auto,
+]{biblatex}
+\input{cfg/inc.cfg-biber-de.tex}
+
+\addbibresource{bib/lit.verify.bib}
+\addbibresource{bib/lit.main.bib}
+
+% package for improving the grey value and the line feed handling
+\usepackage{microtype}
+
+%language specific quoting signs
+\usepackage[
+  style=german,
+  autostyle=true,
+]{csquotes}
+
+% language specific hyphenation
+\input{cfg/inc.babelhyphenations.tex}
+
+%%% (3) layout page configuration %%%
+
+% select the visible parts of a page
+% S.31: { plain|empty|headings|myheadings }
+\pagestyle{headings}
+
+% select the wished style of page-numbering
+% S.32: { arabic,roman,Roman,alph,Alph }
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% select the wished distances using the general setlength order:
+% S.34 { baselineskip| parskip | parindent }
+% - general no indent for paragraphs
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.2ex plus 0.2ex minus 0.2ex}
+
+
+%- start(footnote-configuration)
+
+\deffootnote[1.5em]{1.5em}{1.5em}{\textsuperscript{\thefootnotemark)\ }}
+
+%for using label as nameref
+\usepackage{nameref}
+
+%integrate nomenclature
+\input{cfg/inc.cfg-ncl-de.tex}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{bookmarks=true,breaklinks=true,colorlinks=true,citecolor=blue,draft=false}
+
+\usepackage[T1]{fontenc}
+\usepackage{wesu}
+\usepackage{suetterl} % provided by fundus-suetterlin of TexLive
+
+\usepackage{fontspec}
+\newfontfamily\suetterhjz{Suetterlin HJZ 1911 Italic2024-03}
+
+\usepackage{fontawesome6}
+
+\newcommand{\sz}{{\ss}}
+
+\begin{document}
+
+%% use all entries of the bliography
+\nocite{*}
+
+\titlehead{proSuetterlin.ltx}
+\subject{Release \input{cfg/inc.rel.tex}}
+\title{Sütterlin in \LaTeX-Texten}
+\subtitle{Ein selbsterklärendes Demo / Template}
+\author{Karsten Reincke\input{cfg/inc.lfnote-de.tex}}
+
+\maketitle
+
+\section{Sütterlin unter \LaTeX}
+
+Bisher habe ich drei Methoden gefunden, Sütterlin in einem \LaTeX-Text zu verwenden:
+
+\begin{enumerate}
+  \item \texttt{\textbackslash{}usepackage[T1]\{fontenc\}} und \texttt{\textbackslash{}usepackage\{wesu\}} im Header, sowie \texttt{\{\textbackslash{}wesu ... \}} im Text
+  \item \texttt{\textbackslash{}usepackage[T1]\{fontenc\}}, \texttt{\textbackslash{}usepackage\{suetterl\}} im Header, sowie \texttt{\{\textbackslash{}suetterlin ... \}} im Text
+  \item \texttt{\textbackslash{}usepackage\{fontspec\}}, \texttt{\textbackslash{}newfontfamily\textbackslash{}suetterhjz\{Suetterlin HJZ 1911 Italic2024-03\}} im Header, sowie \texttt{\{\textbackslash{}suetterhjz ...\}} im Text, wobei man zuvor die Schrift von \href{https://zinken.net/Fonts/Suetterlin.html}{https://zinken.net/Fonts/Suetterlin.html} herunterladen, unter \texttt{.local/share/fonts/} als TrueType-Font ablegen und mittels \texttt{sudo fs-cache} bekanntmachen muss.
+\end{enumerate}
+
+Laut Nöhrenberg gibt es 7 Fälle, in denen in Sütterlintexten das \textit{Runde-s} anstelle des \textit{Langen-s} verwendet werden muss.\footcite[vgl.][15ff]{Noehrenberg2022b} Leider vermag keine der hier dargestellten Varianten diese Regeln aus sich heraus komplett abzudecken. 
+
+Allerdings kann man beim Font \textit{wesu} die Verwendung des \textit{Runden-s} erzwingen, indem man die Silbentrennung explizit mit \texttt{\textbackslash -} in das geschriebene Wort einbaut. Dann darf man in den anderen Fällen aber nicht manuell in die Silbentrennung eingreifen. Und man muss akzeptieren, dass - im Quelltext geschrieben: \textit{Kios\textbackslash{}-k} - als {\wesu Kios\-k} erscheint und im Falle eines Zeilenumbruchs irregulär zwischen \texttt{s} und \texttt{k} getrennt wird.
+
+Außerdem gibt es laut Nöhrenberg in Sütterlin ein gesondertes Zeichen für das \texttt{ß}, nämlich {\wesu {\ss}}. Dies ist aber offensichtlich nur über die alte \LaTeX-Notation \texttt{\textbackslash ss} erreichbar. Das 8-Bit-Ascii- bzw. UTF-8-Zeichen \texttt{ß} literal im \LaTeX-Text zu verwenden, hilft nicht.
+
+Damit das angrenzende Leerzeichen nicht unterdrückt wird, muss das Syntagma für das Zeichen {\wesu {\ss}} im \LaTeX-Quelltext für den Sütterlintext noch in geschweifte Klammern gesetzt werden, was das etwas umständliche Syntagma \texttt{\{\textbackslash ss\}} ergäbe. Zur Vereinfachung habe ich einen entsprechenden Befehl in der Präambel definiert:
+
+\begin{verbatim}
+  \newcommand{\sz}{{\ss}}
+\end{verbatim}
+
+So bleibt bisher als Fazit, dass zwar die Schrift \textit{Suetterlin-HJZ-Italic\_1911.ttf} das vielleicht schönere Schriftbild bietet, dass aber nur mit \textit{wesu} die Sütterlinregeln in/mit {\LaTeX} umgesetzt werden können.
+
+\subsection{Writing \textit{Sütterlin} with package \textit{wesu}}
+
+{\wesu Hier ein Text, geschrieben in Sütterlin via \texttt{xelatex} und Package \texttt{wesu}}
+
+Hier die Schluss-S-Probe:
+
+\begin{itemize}
+  \item \textit{Rundes-S}:
+  \begin{itemize}
+    \item[\faCheck] am Wortende: Haus = {\wesu Haus}, Maus = {\wesu Maus}, Tennis = {\wesu Tennis} 
+    \item[\faCheck] in zusammengesetzten Wörtern: Marsmensch = {\wesu Mars\-mensch}, Haustür = {\wesu Haus\-tür} 
+    \item[\faCheck] bei Fugenmorphem: Königstochter = {\wesu Königs\-tochter}, Valentinstag ={\wesu Valentins\-tag} 
+    \item[\faCheck] vor konsonantischen Nachsilben: böse = {\wesu böse} versus Bos\-heit = {\wesu Bosheit} 
+    \item[\faCheck] am Ende der Vorsilben 'dis' und 'des': Desinformation = {\wesu Des\-information}, Disharmonie = {\wesu Dis\-harmonie} 
+    \item[\faCheck] am Wortende vor k: Kiosk = {\wesu Kios\-k} grotesk = {\wesu grotes\-k} 
+    \item[\faCheck] am Silbenende vor d, k, m, n, w: Potsdam = {\wesu Pots\-dam}, Charisma= {\wesu Charis\-ma}
+  \end{itemize}
+  \item[\faCheck] \textit{Langes s} im Wort und sonst: Mensch = {\wesu Mensch}, hasten = {\wesu hasten}, Tasse = {\wesu Tasse} 
+  \item[\faCheck] ß wie früher üblich: Haß = {\wesu Ha\ss} , daß = {\wesu da\ss} 
+\end{itemize}
+
+\subsection{Writing \textit{Sütterlin} with package \textit{suetterl}}
+
+{\suetterlin Hier ein Text, geschrieben in Sütterlin via \texttt{xelatex} und Package \texttt{sutterl}, enthalten in CTAN-Paket \texttt{fundus-suetterlin}}
+
+\begin{itemize}
+  \item \textit{Rundes-S}:
+  \begin{itemize}
+    \item[\faXmark] am Wortende: Haus = {\suetterlin Haus}, Maus = {\suetterlin Maus}, Tennis = {\suetterlin Tennis} 
+    \item[\faXmark] in zusammengesetzten Wörtern: Marsmensch = {\suetterlin Mars\-mensch}, Haustür = {\suetterlin Haus\-tür}
+    \item[\faXmark] bei Fugenmorphem: Königstochter = {\suetterlin Königs\-tochter}, Valentinstag ={\suetterlin Valentins\-tag}
+    \item[\faXmark] vor konsonantischen Nachsilben: böse = {\suetterlin böse} versus Bosheit = {\suetterlin Bos\-heit}
+    \item[\faXmark] am Ende der Vorsilben 'dis' und 'des': Desinformation = {\suetterlin Des\-information}, Disharmonie = {\suetterlin Dis\-harmonie}
+    \item[\faXmark] am Wortende vor k: Kiosk = {\suetterlin Kios\-k} grotesk = {\suetterlin grotes\-k}
+    \item[\faXmark] am Silbenende vor d, k, m, n, w: Potsdam = {\suetterlin Pots\-dam}, Charisma= {\suetterlin Charis\-ma}
+  \end{itemize}
+  \item[\faCheck] \textit{Langes s} im Wort und sonst: Mensch = {\suetterlin Mensch}, hasten = {\suetterlin hasten}, Tasse = {\suetterlin Tasse}
+  \item[\faCheck] ß wie früher üblich: Haß = {\suetterlin Ha\ss} , daß = {\wesu da\ss} 
+  
+\end{itemize}
+
+\subsection{Writing \textit{Sütterlin} with \textit{Suetterlin-HJZ-Italic\_1911.ttf}}
+
+{\suetterhjz Hier ein Text, geschrieben in Sütterlin via \texttt{xelatex} und Font \texttt{Suetterlin-HJZ-Italic\_1911.ttf}, entwickelt von Hans {Jürgen Zinken}}
+
+\begin{itemize}
+  \item \textit{Rundes-S}:
+  \begin{itemize}
+    \item[\faXmark] am Wortende: Haus = {\suetterhjz Hau\-s}, Maus = {\suetterhjz Maus}, Tennis = {\suetterhjz Tennis} 
+    \item[\faXmark] in zusammengesetzten Wörtern: Marsmensch = {\suetterhjz Mars\-mensch}, Haustür = {\suetterhjz Haus\-tür}
+    \item[\faXmark] bei Fugenmorphem: Königstochter = {\suetterhjz Königs\-tochter}, Valentins\-tag ={\suetterhjz Valentins\-tag}
+    \item[\faXmark] vor konsonantischen Nachsilben: böse = {\suetterhjz böse} versus Bosheit = {\suetterhjz Bos\-heit}
+    \item[\faXmark] am Ende der Vorsilben 'dis' und 'des': Desinformation = {\suetterhjz Des\-information}, Disharmonie = {\suetterhjz Dis\-harmonie}
+    \item[\faXmark] am Wortende vor k: Kiosk = {\suetterhjz Kios\-k} grotesk = {\suetterhjz grotes\-k}
+    \item[\faXmark] am Silbenende vor d, k, m, n, w: Potsdam = {\suetterhjz Pots\-dam}, Charisma= {\suetterhjz Charis\-ma}
+  \end{itemize}
+  \item[\faCheck] \textit{Langes s} im Wort und sonst: Mensch = {\suetterhjz Mensch}, hasten = {\suetterhjz hasten}, Tasse = {\suetterhjz Tasse}
+  \item[\faCheck] ß wie früher üblich: Haß = {\suetterhjz Ha\ss} , daß = {\suetterhjz da\ss}
+\end{itemize}
+
+\section{Zur Verifikation von klassischen Zitierformen}
+
+
+\begin{itemize}
+
+  \item \enquote{Zitat mit \enquote{eingebettetem Zitat}}
+
+  \item Deutscher Satz \foreignquote{german}{with embedded foreign phrase}
+  als eingebettetes Zitat. Erwartetes Resultat: Deutsche Anführungszeichen,
+  weil Teil in einem deutsche Satz.
+
+  \item Autonomes englischsprachiges Zitat:
+  \begin{quote}
+    \foreignquote{english}{This shall be an English written paragraph containing
+    a set of sentences which together build the quote.}
+  \end{quote}
+  Erwartetes Ergebnis: Englische Anführungszeichen, weil autonomer Satz.
+\end{itemize}
+
+\subsection{Verifikation: Literaturnachweis}
+\begin{itemize}
+  \item Buch1 (erstverwendungen)\footcite[vgl.][15]{KantKdrV1974}
+  \item ders. ebda.\footcite[vgl.][15]{KantKdrV1974}
+  \item ders. a.a.O.\footcite[vgl.][23]{KantKdrV1974}
+  \item Buch2 (erstverwendung)\footcite[vgl.][15]{KantKdU1974}
+  \item Buch1 (wiederverwendung)\footcite[vgl.][15]{KantKdrV1974}
+\end{itemize}
+
+\input{bib/ncl.abbrevs-de.tex}
+\input{bib/ncl.journals.tex}
+\printnomenclature
+\printbibliography
+
+\end{document}
