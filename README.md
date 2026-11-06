@@ -6,8 +6,8 @@
 -->
 
 <p align="center">
-    <a href="https://github.com/kreincke/proSuetterlin.ltx/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/kreincke/proScientia.ltx?style=flat"></a>
-    <a href="https://github.com/kreincke/proSuetterlin.ltx/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/kreincke/proScientia.ltx?style=flat"></a>
+    <a href="https://github.com/kreincke/proSuetterlin.ltx/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/kreincke/proSuetterlin.ltx?style=flat"></a>
+    <a href="https://github.com/kreincke/proSuetterlin.ltx/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/kreincke/proSuetterlin.ltx?style=flat"></a>
     <a href="https://github.com/kreincke/proSuetterlin.ltx/blob/master/LICENSE" title="License"><img src="https://img.shields.io/badge/License-CC_BY_4.0-blue.svg?style=flat"></a>
 </p>
 
