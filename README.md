@@ -6,6 +6,7 @@
 -->
 
 <p align="center">
+     <a href="https://github.com/kreincke/proSuetterlin.ltx/"><img src="logo.png" height="80"></a><br />
     <a href="https://github.com/kreincke/proSuetterlin.ltx/commits/" title="Last Commit"><img src="https://img.shields.io/github/last-commit/kreincke/proSuetterlin.ltx?style=flat"></a>
     <a href="https://github.com/kreincke/proSuetterlin.ltx/issues" title="Open Issues"><img src="https://img.shields.io/github/issues/kreincke/proSuetterlin.ltx?style=flat"></a>
     <a href="https://github.com/kreincke/proSuetterlin.ltx/blob/master/LICENSE" title="License"><img src="https://img.shields.io/badge/License-CC_BY_4.0-blue.svg?style=flat"></a>
@@ -20,7 +21,6 @@
   <a href="#licensing">Licensing</a> 
 </p>
 
-  ![the proSuetterlinLogo](img/logo.png)  
 ***proSuetterlin.ltx*** offers a set of configuration- and template-files to use the old German handwriting in *LaTeX*-Files, particularly in texts of the relevant humanities disciplines. It is primarily aimed at German speaking and writing people/scientists. 
 
 ## Use
