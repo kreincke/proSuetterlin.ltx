@@ -15,7 +15,7 @@
   <a href="#use">Use</a>  
   <a href="#structure">Structure</a>  
   <a href="#prerequisites">Prerequisites</a>  
-  <a href="#background">Documentation</a>  
+  <a href="#background">Background</a>  
   <a href="#contributions">Contributors</a>  
   <a href="#licensing">Licensing</a>
 </p>
