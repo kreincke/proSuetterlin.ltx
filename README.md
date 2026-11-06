@@ -15,14 +15,14 @@
   <a href="#use">Use</a>  
   <a href="#structure">Structure</a>  
   <a href="#prerequisites">Prerequisites</a>  
-  <a href="#documentation">Documentation</a>  
+  <a href="#background">Documentation</a>  
   <a href="#contributions">Contributors</a>  
   <a href="#licensing">Licensing</a>
 </p>
 
 ***proSuetterlin.ltx*** offers a set of configuration- and template-files to use the old German handwriting in *LaTeX*-Files, particularly in texts of the relevant humanities disciplines. It is primarily aimed at German speaking and writing people/scientists. 
 
-## Getting your own usable project directory
+## Use
 
 For setting up ***proSuetterlin.ltx*** successfully:
 
